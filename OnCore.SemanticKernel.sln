@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1E08F419-9356-4E68-B623-611206B77B88}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00 Host", "00 Host", "{9C471ABF-26C4-4303-A992-373FFF6DD30D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnCore.SemanticKernel.Cli", "src\OnCore.SemanticKernel.Cli\OnCore.SemanticKernel.Cli.csproj", "{47812DDE-338B-4D67-930D-F04439DCEAD2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{47812DDE-338B-4D67-930D-F04439DCEAD2} = {9C471ABF-26C4-4303-A992-373FFF6DD30D}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{47812DDE-338B-4D67-930D-F04439DCEAD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47812DDE-338B-4D67-930D-F04439DCEAD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47812DDE-338B-4D67-930D-F04439DCEAD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47812DDE-338B-4D67-930D-F04439DCEAD2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
