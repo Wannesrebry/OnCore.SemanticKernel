@@ -23,7 +23,7 @@ public static class ServiceCollectionExtensions
     
     public static IServiceCollection RegisterKernel(this IServiceCollection serviceCollection)
     {
-        serviceCollection.AddSingleton<KernelFactory>();
+        serviceCollection.AddScoped<KernelFactory>();
 
         serviceCollection.AddSingleton<Kernel>(sp =>
         {
