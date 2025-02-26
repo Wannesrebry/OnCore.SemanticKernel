@@ -45,3 +45,11 @@ dotnet user-secrets set "Seq:ApiKey" "your_api_key_here"
 ```zsh
 docker run -d --name redis-stack -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
 ```
+
+### Resources & Links: 
+- https://devblogs.microsoft.com/dotnet/introducing-microsoft-extensions-ai-preview/
+- https://www.nuget.org/packages/Microsoft.Extensions.AI.Abstractions/#readme-body-tab
+- https://docs.x.ai/docs/guides/function-calling#walkthrough
+- https://llm-stats.com/
+- https://ollama.com/
+- https://ollama.com/library/nomic-embed-text
