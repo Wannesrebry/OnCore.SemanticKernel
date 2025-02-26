@@ -9,7 +9,9 @@ public class AzureOpenAiChatClientFactory
     public static IChatClient Create(string modal = "gpt-4o")
     {
         return new AzureOpenAIClient(
-  
+            new Uri(""),
+            new AzureKeyCredential(
+                "")
         ).AsChatClient(modal);
     }
 }
