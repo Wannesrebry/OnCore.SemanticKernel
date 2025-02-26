@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.SemanticKernel.ChatCompletion;
+using Microsoft.SemanticKernel.Connectors.OpenAI;
 using OnCore.SemanticKernel.Cli.Configuration;
-using OnCore.SemanticKernel.Cli.Functions;
 
 var serviceCollection = new ServiceCollection();
 
@@ -10,12 +11,34 @@ var serviceProvider = serviceCollection.BuildServiceProvider();
 
 var kernel = serviceProvider.GetRequiredService<Kernel>();
 
-var result = await kernel.InvokePromptAsync(
-    "Give me a list of breakfast foods with eggs and cheese"
-);
-Console.WriteLine(result);
+var chat = kernel.GetRequiredService<IChatCompletionService>();
 
-var result2 = await kernel.InvokePromptAsync("Hello, this is a test!");
-Console.WriteLine(result2);
+// Enable planning
+OpenAIPromptExecutionSettings openAiPromptExecutionSettings = new() 
+{
+    ToolCallBehavior = ToolCallBehavior.EnableKernelFunctions,
+    Temperature = 1,
+    MaxTokens = 4096,
+};
 
-var testFunction = new ExampleKernelFunction();
+PromptExecutionSettings promptExecutionSettings = new()
+{
+#pragma warning disable SKEXP0001
+    FunctionChoiceBehavior = FunctionChoiceBehavior.Auto()
+#pragma warning restore SKEXP0001
+};
+
+var history = new ChatHistory();
+history.AddUserMessage("What lights are currently on?");
+
+// Get the response from the AI
+var result = await chat.GetChatMessageContentsAsync(
+    history,
+    executionSettings: promptExecutionSettings,
+    kernel: kernel);
+
+// Print the results
+foreach (var r in result)
+{
+    Console.WriteLine(r.Content);
+}

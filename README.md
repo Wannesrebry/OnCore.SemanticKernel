@@ -40,3 +40,8 @@ dotnet user-secrets init
 dotnet user-secrets set "AzureOpenAi:ApiKey" "your_api_key_here"
 dotnet user-secrets set "Seq:ApiKey" "your_api_key_here"
 ```
+
+### Redis stack database: 
+```zsh
+docker run -d --name redis-stack -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
+```

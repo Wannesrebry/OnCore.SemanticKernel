@@ -269,3 +269,4 @@ appsettings.Release.json
 *.db-wal
 
   
+src/OnCore.SemanticKernel.Cli2/Exercises.csv

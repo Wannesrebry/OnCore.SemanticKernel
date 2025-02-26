@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using OnCore.SemanticKernel.Cli.Configuration;
+using OnCore.SemanticKernel.Cli.KernelPlugins;
 using Serilog;
 
 namespace OnCore.SemanticKernel.Cli.Factories;
@@ -9,20 +10,32 @@ internal class KernelFactory
 {
     private readonly AzureOpenAiOptions _azureOpenAiOptions;
     private readonly SeqOptions _seqOptions;
-    public KernelFactory(IOptions<AzureOpenAiOptions> azureOpenAiOptions, IOptions<SeqOptions> seqOptions)
+
+    public KernelFactory(
+        IOptions<AzureOpenAiOptions> azureOpenAiOptions,
+        IOptions<SeqOptions> seqOptions
+    )
     {
         _seqOptions = seqOptions.Value;
         _azureOpenAiOptions = azureOpenAiOptions.Value;
-    }     
-    
+    }
+
     public Kernel CreateKernel()
     {
         IKernelBuilder builder = Kernel.CreateBuilder();
-        
+            
         AddLogger(builder);
         AddAzureOpenAiChatCompletion(builder);
+        AddLightToggleCustomPlugin(builder);
+
+        Kernel kernel = builder.Build();
         
-        return builder.Build();
+        return kernel;
+    }
+
+    private void AddLightToggleCustomPlugin(IKernelBuilder builder)
+    {
+        builder.Plugins.AddFromType<LightsPlugin>(LightsPlugin.Name);
     }
 
     private void AddLogger(IKernelBuilder builder)
@@ -39,7 +52,7 @@ internal class KernelFactory
             loggingBuilder.AddSerilog(logger, dispose: true);
         });
     }
-    
+
     private void AddAzureOpenAiChatCompletion(IKernelBuilder builder)
     {
         builder.AddAzureOpenAIChatCompletion(

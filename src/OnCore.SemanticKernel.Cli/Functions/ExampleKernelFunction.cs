@@ -1,3 +1,6 @@
 namespace OnCore.SemanticKernel.Cli.Functions;
 
-internal class ExampleKernelFunction { }
+internal class TimePlugin
+{
+    public TimePlugin() { }
+}
